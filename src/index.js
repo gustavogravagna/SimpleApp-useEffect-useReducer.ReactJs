@@ -1,17 +1,46 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Usuario from './componentes/Usuario';
+import FormularioInicioSesion from './componentes/FormularioInicioSesion';
+import ContadorClass from './componentes/ContadorClass';
+import Boton from './elementos/Boton';
+// import ContadorFuncional from './componentes/ContadorFuncional';
+import EjemploReducer from './componentes/EjemploReducer';
+
+const App = () => {
+  const [session, cambiarEstadoSesion] = useState(false);
+  useEffect(() => {
+		alert('Bienvenido al Cpanel')
+		// Conectar a una API
+	}, []);
+
+  return (
+    <>
+      {session === true ?
+      <div>
+        <Usuario  nombre = 'Gustavo' pais = 'Italia' /> 
+        <ContadorClass cantidadAIncrementar={10} cantidadADisminuir={2} />
+        <hr />
+        <Usuario />
+        <EjemploReducer/>
+        <Boton onClick={() => cambiarEstadoSesion(false)}>Cerrar Sesion</Boton>
+      </div>
+      :
+      <div>
+        <FormularioInicioSesion cambiarEstadoSesion={cambiarEstadoSesion} />
+        <br />
+      </div>
+      }
+    </>
+  ) 
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-);
+)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
